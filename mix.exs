@@ -3,14 +3,15 @@ defmodule PublicSuffix.Mixfile do
 
   def project do
     [app: :public_suffix,
-     version: "0.5.0",
+     version: "0.6.0",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
      description: description(),
      package: package(),
-     deps: deps()]
+     deps: deps(),
+     xref: [exclude: [:ssl, :inets, :httpc, :idna]]]
   end
 
   def application do
@@ -26,7 +27,7 @@ defmodule PublicSuffix.Mixfile do
 
   defp deps do
     [
-      {:idna, "~> 4.0"},
+      {:idna, ">= 1.2.0 and < 6.0.0"},
       # ex_doc and earmark are necessary to publish docs to hexdocs.pm.
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:earmark, ">= 0.0.0", only: :dev},
