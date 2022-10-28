@@ -32,7 +32,13 @@ defmodule PublicSuffix.RulesParser do
       |> Stream.reject(&(&1 =~ ~r/^\s*$/ || String.starts_with?(&1, "//")))
       # "Each line is only read up to the first whitespace"
       |> Stream.map(&String.trim_trailing/1)
-      |> Stream.flat_map(fn rule -> [rule, punycode_domain(rule)] end)
+      |> Stream.flat_map(fn rule -> 
+        if String.starts_with?(rule, "*.") or String.starts_with?(rule, "!") do
+          [rule, rule]
+        else  
+          [rule, punycode_domain(rule)] 
+        end
+      end)
       # "An exclamation mark (!) at the start of a rule marks an exception to a
       # previous wildcard rule."
       |> Enum.split_with(&String.starts_with?(&1, "!"))
