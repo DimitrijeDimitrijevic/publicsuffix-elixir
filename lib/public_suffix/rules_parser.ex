@@ -63,10 +63,12 @@ defmodule PublicSuffix.RulesParser do
 
   @doc false
   def punycode_domain(rule) do
-    rule
-    |> :unicode.characters_to_list
-    |> :idna.to_ascii
-    |> to_string
+    try do
+     punyrule = :idna.to_ascii(rule)  
+     to_string(punyrule)
+     catch
+      :exit, _ -> rule
+    end    
   end
 
   defp to_domain_label_map(rules, type) do
