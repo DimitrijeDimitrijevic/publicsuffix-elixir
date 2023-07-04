@@ -19,15 +19,13 @@ defmodule PublicSuffix.Mixfile do
       # :idna is intentionally NOT included in this list because it is
       # only used at compile time, as part of processing the publicsuffix.org
       # rules file. So it is not needed at runtime.
-      applications: [
-        :logger,
-      ]
+      extra_applications: [:logger]
     ]
   end
 
   defp deps do
     [
-      {:idna, "~> 6.0"},
+      {:idna, "~> 6.1"},
       # ex_doc and earmark are necessary to publish docs to hexdocs.pm.
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:earmark, ">= 0.0.0", only: :dev},
