@@ -19,9 +19,7 @@ defmodule PublicSuffix.Mixfile do
       # :idna is intentionally NOT included in this list because it is
       # only used at compile time, as part of processing the publicsuffix.org
       # rules file. So it is not needed at runtime.
-      applications: [
-        :logger,
-      ]
+      extra_applications: [:logger]
     ]
   end
 
